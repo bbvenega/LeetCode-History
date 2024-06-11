@@ -1,38 +1,21 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int temp1;
-        int least = nums[0];
-        
-    
-         for(auto entry : nums) {
-            if (entry < least) {
-                least = entry;
-            }
-         }
 
-         while(nums[0] != least) {
-            int temp = nums[0];
-            for(int i = 0; i < nums.size(); i++) {
-                
-                int shift = i + 1;
+        int high = nums.size() -1;
+        int low = 0;
+        int ans = nums[0];
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
 
-                if(i >= nums.size() - 1) {
-                    nums[i] = temp;
-                    break;
-                }
-                nums[i] = nums[shift];
-                
-            }
+            if(nums[mid] >= nums[0]) {
+                low = mid+1;
+            } else {
+                ans = nums[mid];
+                high = mid - 1;
             }
 
-                     for(auto entry : nums) {
-            cout << entry;
-         }
-        cout << endl;
-         return least;
-         }
-
-
-    
+        }
+        return ans;
+    }
 };
